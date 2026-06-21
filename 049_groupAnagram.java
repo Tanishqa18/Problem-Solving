@@ -1,16 +1,31 @@
 class Solution {
-    public List<List<String>> groupAnagrams(String[] strs) {
-        Map<String, List<String>> map = new HashMap<>();
+    public void rotate(int[][] matrix) {
 
-        for (String s : strs) {
-            char[] ch = s.toCharArray();
-            Arrays.sort(ch);
-            String key = new String(ch);
+        int n = matrix.length;
 
-            map.putIfAbsent(key, new ArrayList<>());
-            map.get(key).add(s);
+        for(int i = 0; i < n; i++) {
+            for(int j = i; j < n; j++) {
+
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
         }
 
-        return new ArrayList<>(map.values());
+        for(int i = 0; i < n; i++) {
+
+            int left = 0;
+            int right = n - 1;
+
+            while(left < right) {
+
+                int temp = matrix[i][left];
+                matrix[i][left] = matrix[i][right];
+                matrix[i][right] = temp;
+
+                left++;
+                right--;
+            }
+        }
     }
 }
