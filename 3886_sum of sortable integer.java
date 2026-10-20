@@ -1,10 +1,25 @@
 class Solution {
-    public int sumOfSortableIntegers(int[] nums) {
+    public int sortableIntegers(int[] nums) {
         int n = nums.length;
         int ans = 0;
+        boolean sorted = true;
+
+        for (int i = 1; i < n; i++) {
+            if (nums[i] < nums[i - 1]) {
+                sorted = false;
+                break;
+            }
+        }
 
         for (int k = 1; k <= n; k++) {
             if (n % k != 0) {
+                continue;
+            }
+
+            if (k == 1) {
+                if (sorted) {
+                    ans += 1;
+                }
                 continue;
             }
 
